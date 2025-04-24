@@ -119,6 +119,18 @@ Los estilos específicos y visuales finos se desarrollan en archivos SCSS separa
 
 ___
 
+## Diseño responsive y enfoque mobile-first
+
+El diseño de esta aplicación sigue un enfoque **mobile-first**, asegurando una experiencia óptima en dispositivos móviles como prioridad.
+
+- Se ha utilizado **Tailwind CSS** para implementar una estructura responsive mediante utilidades como `sm:`, `md:`, `lg:`, `xl:`, asegurando una progresión fluida hacia pantallas mayores.
+- Todos los componentes y páginas están pensados para **adaptarse correctamente** a distintos tamaños de pantalla.
+- El diseño ha sido creado con el objetivo de mantener una **UX clara y accesible**, sin depender de frameworks visuales pesados.
+
+El layout se adapta desde dispositivos móviles hasta pantallas grandes, manteniendo proporciones, jerarquía y usabilidad en todo momento.
+
+___
+
 ## Licencia
 
 Este proyecto está licenciado bajo la MIT License.
