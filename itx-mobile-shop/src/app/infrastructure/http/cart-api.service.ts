@@ -5,8 +5,8 @@ import { environment } from '../../../environments/environment';
 
 interface AddToCartPayload {
   id: string;
-  colorCode: string;
-  storageCode: string;
+  colorCode: number;
+  storageCode: number;
 }
 
 interface AddToCartResponse {
