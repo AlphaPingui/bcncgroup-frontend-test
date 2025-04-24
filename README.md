@@ -79,6 +79,22 @@ Este repositorio sigue el estándar de commits convencionales para mejorar la le
 
 ___
 
+## Linting y calidad de código
+
+Este proyecto utiliza **ESLint** como linter principal para TypeScript y templates de Angular.
+
+Para lanzar el linter:
+```bash
+npm run lint
+```
+
+Para corregir automáticamente problemas detectables:
+```bash
+npm run lint -- --fix
+```
+
+___
+
 ## Licencia
 
 Este proyecto está licenciado bajo la MIT License.
