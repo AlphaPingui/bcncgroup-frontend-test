@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { GetProductDetailUseCase } from '../../application/use-cases/get-product-detail.usecase';
 import { RouterModule } from '@angular/router';
 import { ProductDetail } from '../../domain/models/product.model';
+import { AddProductToCartUseCase } from '../../application/use-cases/add-product-to-cart.usecase';
 
 @Component({
   standalone: true,
@@ -11,14 +12,17 @@ import { ProductDetail } from '../../domain/models/product.model';
   templateUrl: './product-detail-page.component.html',
   styleUrls: ['./product-detail-page.component.scss'],
   imports: [CommonModule, RouterModule],
-  providers: [GetProductDetailUseCase]
+  providers: [GetProductDetailUseCase, AddProductToCartUseCase]
 })
 
 export class ProductDetailPageComponent {
   private readonly getDetail = inject(GetProductDetailUseCase);
   private readonly route = inject(ActivatedRoute);
+  private readonly AddProductToCart = inject(AddProductToCartUseCase);
 
   readonly product = signal<ProductDetail | null>(null);
+  readonly selectedStorage = signal<number | null>(null);
+  readonly selectedColor = signal<number | null>(null);
 
   constructor() {
     effect(() => {
@@ -46,7 +50,7 @@ export class ProductDetailPageComponent {
 
 
   private sanitizeDetail(detail: ProductDetail): ProductDetail {
-    return {
+    const sanitized = {
       ...detail,
       wlan: this.normalizeToArray(detail.wlan),
       bluetooth: this.normalizeToArray(detail.bluetooth),
@@ -78,5 +82,41 @@ export class ProductDetailPageComponent {
       price: detail.price || 'N/D',
       options: detail.options ?? { colors: [], storages: [] }
     };
+
+    if (sanitized.options.colors.length > 0) {
+      this.selectedColor.set(Number(sanitized.options.colors[0].code));
+    }
+
+    if (sanitized.options.storages.length > 0) {
+      this.selectedStorage.set(Number(sanitized.options.storages[0].code));
+    }
+
+    return sanitized;
   }
+
+  handleStorageChange(event: Event): void {
+    const value = (event.target as HTMLSelectElement).value;
+    this.selectedStorage.set(Number(value));
+  }
+
+  handleColorChange(event: Event): void {
+    const value = (event.target as HTMLSelectElement).value;
+    this.selectedColor.set(Number(value));
+  }
+
+
+  addToCart(id: string): void {
+    const colorCode = this.selectedColor();
+    const storageCode = this.selectedStorage();
+
+    if (!colorCode || !storageCode) return;
+
+    this.AddProductToCart.execute({ id, colorCode, storageCode }).subscribe({
+      next: () => {},
+      error: (error) => {
+        console.error('Error al añadir al carrito:', error);
+      }
+    });
+  }
+
 }
