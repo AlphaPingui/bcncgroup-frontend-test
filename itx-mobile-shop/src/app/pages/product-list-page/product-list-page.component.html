@@ -22,13 +22,11 @@
       role="list"
       aria-label="Lista de productos"
     >
-      <!-- mock product -->
-      <article class="bg-white border border-gray-200 rounded-lg shadow-sm p-4 flex flex-col">
-        <div class="h-40 w-full bg-gray-100 mb-4 rounded"></div>
-        <h3 class="text-lg font-medium text-gray-800">Nombre del producto</h3>
-        <p class="text-sm text-gray-500">Marca</p>
-        <p class="text-base font-semibold text-blue-600 mt-auto">Precio (€)</p>
-      </article>
+      <app-product-card
+        *ngFor="let product of products"
+        [product]="product"
+        class="h-full"
+      />
     </div>
   </section>
   
