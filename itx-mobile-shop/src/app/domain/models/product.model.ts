@@ -13,7 +13,7 @@ export interface Product {
     edge: string;
     announced: string;
     status: string;
-    dimensions: string;
+    dimentions: string;
     weight: string;
     sim: string;
     displayType: string;
@@ -27,7 +27,7 @@ export interface Product {
     internalMemory: string[];
     ram: string;
     primaryCamera: string[];
-    secondaryCamera: string[];
+    secondaryCmera: string[];
     speaker: string;
     audioJack: string;
     wlan: string[];
