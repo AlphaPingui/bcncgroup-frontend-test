@@ -2,7 +2,7 @@ export interface Product {
     id: string;
     brand: string;
     model: string;
-    price: number;
+    price: number | string;
     imgUrl: string;
   }
   
@@ -48,7 +48,7 @@ export interface Product {
   }
   
   export interface Option {
-    code: number;
+    code: number | string;
     name: string;
   }
   
