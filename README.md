@@ -32,7 +32,7 @@ ___
 
 ## Tecnologías utilizadas
 
-- Angular 17+
+- Angular 19+
 - RxJS
 - Angular Router
 - SCSS
@@ -92,6 +92,30 @@ Para corregir automáticamente problemas detectables:
 ```bash
 npm run lint -- --fix
 ```
+
+___
+
+## Estilos y maquetación con Tailwind CSS
+
+Este proyecto utiliza **Tailwind CSS** como sistema de maquetación y diseño de interfaz.
+
+La instalación se ha hecho manualmente según la guía oficial, usando `postcss` con una configuración personalizada en `.postcssrc.json`.
+
+Las capas de estilos se han importado en `src/styles.scss` de forma explícita:
+
+```scss
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css" layer(utilities);
+```
+
+Tailwind se usa principalmente para:
+
+- Layouts (flex, grid, gap, etc.)
+- Tipografía y espaciado
+- Componentes responsive
+
+Los estilos específicos y visuales finos se desarrollan en archivos SCSS separados por componente.
 
 ___
 
