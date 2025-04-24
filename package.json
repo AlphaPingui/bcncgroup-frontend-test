@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Este proyecto es una prueba técnica realizada para una posición de FullStack Developer. La aplicación simula una pequeña tienda de dispositivos móviles, permitiendo visualizar productos, consultar detalles, y añadirlos a una cesta de compra.",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AlphaPingui/bcncgroup-frontend-test.git"
