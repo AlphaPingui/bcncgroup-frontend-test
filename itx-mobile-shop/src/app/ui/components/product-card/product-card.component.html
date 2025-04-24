@@ -1,13 +1,16 @@
-<article class="bg-white border border-gray-200 rounded-lg shadow-sm p-4 flex flex-col h-full">
-    <img
-      [src]="product.imgUrl"
-      [alt]="product.model"
-      class="h-40 w-full object-contain mb-4 rounded bg-gray-50"
-      loading="lazy"
-    />
+<a [routerLink]="['/product', product.id]"
+  class="block bg-white border border-gray-200 rounded-lg shadow-sm p-4 h-full
+        hover:ring-2 hover:ring-blue-400 transition"
+  [attr.aria-label]="'Ver detalles de ' + product.brand + ' ' + product.model">
   
-    <h3 class="text-lg font-medium text-gray-800">{{ product.model }}</h3>
-    <p class="text-sm text-gray-500">{{ product.brand }}</p>
-    <p class="text-base font-semibold text-blue-600 mt-auto">{{ product.price | currency:'EUR':'symbol':'1.0-0' }}</p>
- </article>
-  
+  <img
+    [src]="product.imgUrl"
+    [alt]="product.model"
+    class="h-40 w-full object-contain mb-4 rounded bg-gray-50"
+    loading="lazy"
+  />
+
+  <h3 class="text-lg font-medium text-gray-800">{{ product.model }}</h3>
+  <p class="text-sm text-gray-500">{{ product.brand }}</p>
+  <p class="text-base font-semibold text-blue-600 mt-2">{{ product.price | currency:'EUR':'symbol':'1.0-0' }}</p>
+</a>

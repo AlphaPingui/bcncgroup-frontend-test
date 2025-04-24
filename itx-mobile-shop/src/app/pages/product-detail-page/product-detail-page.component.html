@@ -1,0 +1,111 @@
+<section class="px-4 py-6 max-w-screen-lg mx-auto">
+    <div class="mb-6">
+        <a [routerLink]="['/']"
+            class="text-blue-600 hover:underline text-sm font-medium inline-flex items-center gap-1">
+            ← Volver a la lista de productos
+        </a>
+    </div>
+
+    <ng-container *ngIf="product() as detail; else loading">
+        <article class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+            <!-- Columna 1 -->
+            <div class="w-full">
+                <img [src]="detail.imgUrl" [alt]="detail.model" class="w-full object-contain bg-gray-100 rounded" />
+            </div>
+
+            <!-- Columna 2 -->
+            <div class="space-y-3">
+                <header>
+                    <h1 class="text-2xl font-semibold text-gray-800">{{ detail.brand }} {{ detail.model }}</h1>
+                    <p class="text-sm text-gray-500 mt-1">Sistema operativo: {{ detail.os }}</p>
+                    <p class="text-sm text-gray-500">Anunciado el: {{ detail.announced }}</p>
+                    <p class="text-sm text-gray-500">Estado: {{ detail.status }}</p>
+                </header>
+
+                <!-- Pantalla -->
+                <section>
+                    <h2 class="text-base font-semibold text-gray-800 mb-1">Pantalla</h2>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                        <li><strong>Tipo:</strong> {{ detail.displayType }}</li>
+                        <li><strong>Tamaño:</strong> {{ detail.displaySize }}</li>
+                        <li><strong>Resolución:</strong> {{ detail.displayResolution }}</li>
+                    </ul>
+                </section>
+
+                <!-- Dimensiones y peso -->
+                <section>
+                    <h2 class="text-base font-semibold text-gray-800 mb-1">Dimensiones</h2>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                        <li><strong>Medidas:</strong> {{ detail.dimentions }}</li>
+                        <li><strong>Peso:</strong> {{ detail.weight }}</li>
+                        <li><strong>SIM:</strong> {{ detail.sim }}</li>
+                    </ul>
+                </section>
+
+                <!-- Memoria -->
+                <section>
+                    <h2 class="text-base font-semibold text-gray-800 mb-1">Memoria</h2>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                        <li><strong>RAM:</strong> {{ detail.ram }}</li>
+                        <li><strong>Memoria interna:</strong> {{ detail.internalMemory.join(', ') }}</li>
+                        <li><strong>Memoria externa:</strong> {{ detail.externalMemory }}</li>
+                    </ul>
+                </section>
+
+                <!-- Procesamiento -->
+                <section>
+                    <h2 class="text-base font-semibold text-gray-800 mb-1">Procesador</h2>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                        <li><strong>CPU:</strong> {{ detail.cpu }}</li>
+                        <li><strong>Chipset:</strong> {{ detail.chipset }}</li>
+                        <li><strong>GPU:</strong> {{ detail.gpu }}</li>
+                    </ul>
+                </section>
+
+                <!-- Cámaras y multimedia -->
+                <section>
+                    <h2 class="text-base font-semibold text-gray-800 mb-1">Cámaras y multimedia</h2>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                        <li><strong>Principal:</strong> {{ detail.primaryCamera.join(', ') }}</li>
+                        <li><strong>Secundaria:</strong> {{ detail.secondaryCmera.join(', ') }}</li>
+                        <li><strong>Altavoz:</strong> {{ detail.speaker }}</li>
+                        <li><strong>Jack 3.5mm:</strong> {{ detail.audioJack }}</li>
+                        <li><strong>Radio:</strong> {{ detail.radio }}</li>
+                    </ul>
+                </section>
+
+                <!-- Conectividad -->
+                <section>
+                    <h2 class="text-base font-semibold text-gray-800 mb-1">Conectividad</h2>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                        <li><strong>WLAN:</strong> {{ detail.wlan.join(', ') }}</li>
+                        <li><strong>Bluetooth:</strong> {{ detail.bluetooth.join(', ') }}</li>
+                        <li><strong>GPS:</strong> {{ detail.gps }}</li>
+                        <li><strong>NFC:</strong> {{ detail.nfc }}</li>
+                        <li><strong>USB:</strong> {{ detail.usb }}</li>
+                    </ul>
+                </section>
+
+                <!-- Batería y demás -->
+                <section>
+                    <h2 class="text-base font-semibold text-gray-800 mb-1">Sensores y batería</h2>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                        <li><strong>Sensores:</strong> {{ detail.sensors.join(', ') }}</li>
+                        <li><strong>Batería:</strong> {{ detail.battery }}</li>
+                    </ul>
+                </section>
+
+                <!-- Precio -->
+                <section>
+                    <h2 class="text-base font-semibold text-gray-800">Precio</h2>
+                    <p class="text-lg font-bold text-blue-600">{{ detail.price }} €</p>
+                </section>
+
+            </div>
+        </article>
+    </ng-container>
+
+    <ng-template #loading>
+        <p class="text-center text-gray-500">Cargando producto...</p>
+    </ng-template>
+</section>
