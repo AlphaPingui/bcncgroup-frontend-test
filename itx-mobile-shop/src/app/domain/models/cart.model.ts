@@ -1,7 +1,7 @@
 export interface AddToCartPayload {
     id: string;
-    colorCode: string;
-    storageCode: string;
+    colorCode: number;
+    storageCode: number;
   }
   
   export interface CartResponse {
