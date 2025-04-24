@@ -5,6 +5,7 @@ import { GetProductDetailUseCase } from '../../application/use-cases/get-product
 import { RouterModule } from '@angular/router';
 import { ProductDetail } from '../../domain/models/product.model';
 import { AddProductToCartUseCase } from '../../application/use-cases/add-product-to-cart.usecase';
+import { CartStateService } from '../../application/services/cart-state.service';
 
 @Component({
   standalone: true,
@@ -19,6 +20,7 @@ export class ProductDetailPageComponent {
   private readonly getDetail = inject(GetProductDetailUseCase);
   private readonly route = inject(ActivatedRoute);
   private readonly AddProductToCart = inject(AddProductToCartUseCase);
+  private readonly cartState = inject(CartStateService);
 
   readonly product = signal<ProductDetail | null>(null);
   readonly selectedStorage = signal<number | null>(null);
@@ -112,7 +114,9 @@ export class ProductDetailPageComponent {
     if (!colorCode || !storageCode) return;
 
     this.AddProductToCart.execute({ id, colorCode, storageCode }).subscribe({
-      next: () => {},
+      next: () => {
+        this.cartState.increment();
+      },
       error: (error) => {
         console.error('Error al añadir al carrito:', error);
       }
