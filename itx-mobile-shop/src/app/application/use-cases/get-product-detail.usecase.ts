@@ -5,11 +5,12 @@ import { ProductApiService } from '../../infrastructure/http/product-api.service
 import { LocalStorageCacheService } from '../../infrastructure/storage/local-storage-cache.service';
 
 export class GetProductDetailUseCase {
+  private readonly cacheKey = 'product-detail';
   private readonly api = inject(ProductApiService);
   private readonly cache = inject(LocalStorageCacheService);
 
   execute(productId: string): Observable<ProductDetail> {
-    const cacheKey = `product-detail-${productId}`;
+    const cacheKey = `${this.cacheKey}-${productId}`;
     const cached = this.cache.get<ProductDetail>(cacheKey);
     if (cached) {
       return of(cached);
