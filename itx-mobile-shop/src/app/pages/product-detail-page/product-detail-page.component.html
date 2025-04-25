@@ -140,6 +140,12 @@
                             Añadir a la cesta
                         </button>
                     </div>
+
+                    <div *ngIf="addedToCart()"
+                        class="text-sm text-green-700 bg-green-100 border border-green-200 px-3 py-2 rounded"
+                        role="status" aria-live="polite">
+                        Producto añadido a la cesta
+                    </div>
                 </section>
 
             </div>

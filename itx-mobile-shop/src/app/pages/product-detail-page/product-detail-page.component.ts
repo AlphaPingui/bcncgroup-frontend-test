@@ -25,6 +25,7 @@ export class ProductDetailPageComponent {
   readonly product = signal<ProductDetail | null>(null);
   readonly selectedStorage = signal<number | null>(null);
   readonly selectedColor = signal<number | null>(null);
+  readonly addedToCart = signal(false);
 
   constructor() {
     effect(() => {
@@ -116,6 +117,8 @@ export class ProductDetailPageComponent {
     this.AddProductToCart.execute({ id, colorCode, storageCode }).subscribe({
       next: () => {
         this.cartState.increment();
+        this.addedToCart.set(true);
+        setTimeout(() => this.addedToCart.set(false), 3000);
       },
       error: (error) => {
         console.error('Error al añadir al carrito:', error);
