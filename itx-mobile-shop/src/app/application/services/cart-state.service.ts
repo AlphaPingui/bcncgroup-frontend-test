@@ -20,9 +20,4 @@ export class CartStateService {
     this.total.set(updated);
     this.localStorage.set(CART_COUNT_KEY, updated);
   }
-
-  reset(): void {
-    this.total.set(0);
-    this.localStorage.set(CART_COUNT_KEY, 0);
-  }
 }
