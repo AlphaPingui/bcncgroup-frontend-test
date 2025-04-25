@@ -5,9 +5,19 @@
       ITX Mobile Shop
     </a>
 
-    <div class="text-sm text-gray-500" aria-label="Breadcrumb">
-      Inicio
-    </div>
+    <nav aria-label="breadcrumb" class="text-sm text-gray-500">
+      <ol class="flex gap-2 items-center">
+        <li>
+          <a routerLink="/" class="hover:underline text-gray-700">Inicio</a>
+        </li>
+        <ng-container *ngIf="productTitle() as title">
+          <li><span class="mx-2">›</span></li>
+          <li>
+            <span class="text-gray-800 font-medium" aria-current="page">{{ title }}</span>
+          </li>
+        </ng-container>
+      </ol>
+    </nav>
 
     <div class="relative">
       <button type="button"

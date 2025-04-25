@@ -1,7 +1,8 @@
 <a [routerLink]="['/product', product.id]"
   class="block bg-white border border-gray-200 rounded-lg shadow-sm p-4 h-full
         hover:ring-2 hover:ring-blue-400 transition"
-  [attr.aria-label]="'Ver detalles de ' + product.brand + ' ' + product.model">
+  [attr.aria-label]="'Ver detalles de ' + product.brand + ' ' + product.model"
+  [state]="{ brand: product.brand, model: product.model }">
   
   <img
     [src]="product.imgUrl"
