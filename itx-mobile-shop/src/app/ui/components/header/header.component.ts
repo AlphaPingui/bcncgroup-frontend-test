@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { CartStateService } from '../../../application/services/cart-state.service';
 
 @Component({
   standalone: true,
@@ -10,5 +11,6 @@ import { RouterModule } from '@angular/router';
   imports: [CommonModule, RouterModule]
 })
 export class HeaderComponent {
-  readonly cartCount = 0;
+  private readonly cartState = inject(CartStateService);
+  readonly cartTotal = this.cartState.total;
 }
