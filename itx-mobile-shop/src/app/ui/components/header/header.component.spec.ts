@@ -1,12 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeaderComponent } from './header.component';
 import { CartStateService } from '../../../application/services/cart-state.service';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd, NavigationExtras } from '@angular/router';
 import { signal } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { Subject } from 'rxjs';
 
 describe('HeaderComponent', () => {
     let fixture: ComponentFixture<HeaderComponent>;
+    const routerEvents$ = new Subject<NavigationEnd>();
 
     const MOCK_CART_STATE = {
         total: signal(1)
@@ -14,8 +16,8 @@ describe('HeaderComponent', () => {
 
     const MOCK_ROUTER = {
         url: '/product/ZmGrkLRPXOTpxsU4jjAcv',
-        events: { subscribe: (cb: any) => cb() },
-        getCurrentNavigation: () => ({
+        events: routerEvents$.asObservable(),
+        getCurrentNavigation: (): { extras: NavigationExtras } => ({
             extras: {
                 state: { brand: 'Acer', model: 'Iconia Talk S' }
             }
@@ -33,6 +35,8 @@ describe('HeaderComponent', () => {
 
         fixture = TestBed.createComponent(HeaderComponent);
         fixture.detectChanges();
+
+        routerEvents$.next(new NavigationEnd(1, '/', MOCK_ROUTER.url));
     });
 
     it('should create the component', () => {
