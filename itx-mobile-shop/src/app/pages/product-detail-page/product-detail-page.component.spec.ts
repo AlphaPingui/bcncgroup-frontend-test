@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProductDetailPageComponent } from './product-detail-page.component';
 import { provideRouter } from '@angular/router';
-import { of } from 'rxjs';
 import { GetProductDetailUseCase } from '../../application/use-cases/get-product-detail.usecase';
 import { ActivatedRoute } from '@angular/router';
 import { ProductDetail } from '../../domain/models/product.model';
 import { By } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 const MOCK_PRODUCT_DETAIL: ProductDetail = {
     id: '8hKbH2UHPM_944nRHYN1n',
@@ -57,18 +57,24 @@ const MOCK_PRODUCT_DETAIL: ProductDetail = {
     }
 };
 
-describe('ProductDetailPageComponent (simplified)', () => {
+describe('ProductDetailPageComponent', () => {
     let fixture: ComponentFixture<ProductDetailPageComponent>;
+    let component: ProductDetailPageComponent;
     let mockDetailUseCase: jasmine.SpyObj<GetProductDetailUseCase>;
 
     beforeEach(async () => {
         mockDetailUseCase = jasmine.createSpyObj('GetProductDetailUseCase', ['execute']);
+
         await TestBed.configureTestingModule({
             imports: [ProductDetailPageComponent],
             providers: [
                 provideRouter([]),
                 provideHttpClient(),
-                { provide: GetProductDetailUseCase, useValue: mockDetailUseCase },
+                provideHttpClientTesting(),
+                {
+                    provide: GetProductDetailUseCase,
+                    useValue: mockDetailUseCase
+                },
                 {
                     provide: ActivatedRoute,
                     useValue: {
@@ -82,25 +88,23 @@ describe('ProductDetailPageComponent (simplified)', () => {
             ]
         }).compileComponents();
 
-        mockDetailUseCase.execute.and.returnValue(of(MOCK_PRODUCT_DETAIL));
-
         fixture = TestBed.createComponent(ProductDetailPageComponent);
+        component = fixture.componentInstance;
+        component.product.set(MOCK_PRODUCT_DETAIL);
         fixture.detectChanges();
     });
 
     it('should create the component', () => {
-        expect(fixture.componentInstance).toBeTruthy();
+        expect(component).toBeTruthy();
     });
 
     it('should display product title', () => {
         const title = fixture.debugElement.query(By.css('h1'));
-        expect(title).not.toBeNull();
-        expect(title.nativeElement.textContent).toContain('Acer Liquid Z6');
-    });
-
-    it('should display product image', () => {
+        expect(title.nativeElement.textContent.trim()).toBe('Acer Liquid Z6');
+      });
+    
+      it('should display product image', () => {
         const img = fixture.debugElement.query(By.css('img'));
-        expect(img).not.toBeNull();
-        expect(img.nativeElement.src).toContain(MOCK_PRODUCT_DETAIL.imgUrl);
-    });
+        expect(img.nativeElement.src).toContain('https://itx-frontend-test.onrender.com/images/8hKbH2UHPM_944nRHYN1n.jpg');
+      });
 });
