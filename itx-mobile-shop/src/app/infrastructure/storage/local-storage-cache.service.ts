@@ -30,14 +30,4 @@ export class LocalStorageCacheService {
       return null;
     }
   }
-
-  remove(key: string): void {
-    localStorage.removeItem(this.prefix + key);
-  }
-
-  clear(): void {
-    Object.keys(localStorage)
-      .filter(key => key.startsWith(this.prefix))
-      .forEach(key => localStorage.removeItem(key));
-  }
 }
