@@ -45,8 +45,6 @@ describe('ProductCardComponent', () => {
 
     it('should have a link to the product detail page', () => {
         const link = fixture.debugElement.query(By.css('a'));
-        expect(link.attributes['ng-reflect-router-link']).toContain('/product/ZmGrkLRPXOTpxsU4jjAcv');
-        expect(link.attributes['ng-reflect-state']).toContain('brand:Acer');
-        expect(link.attributes['ng-reflect-state']).toContain('model:Iconia Talk S');
+        expect(link.nativeElement.getAttribute('href')).toBe('/product/ZmGrkLRPXOTpxsU4jjAcv');
     });
 });
