@@ -5,7 +5,6 @@ import { provideHttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
-import { Product } from '../../domain/models/product.model';
 
 describe('ProductListPageComponent', () => {
     let component: ProductListPageComponent;
