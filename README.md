@@ -129,6 +129,30 @@ El diseño de esta aplicación sigue un enfoque **mobile-first**, asegurando una
 
 El layout se adapta desde dispositivos móviles hasta pantallas grandes, manteniendo proporciones, jerarquía y usabilidad en todo momento.
 
+---
+
+## Testing
+
+Este proyecto utiliza **Jasmine y Karma** para pruebas unitarias de componentes, servicios y casos de uso.
+
+Los tests se encuentran junto a los componentes bajo el sufijo `.spec.ts`. Están orientados a validar:
+
+- La creación y renderizado correcto de componentes.
+- El flujo de datos entre inputs y outputs.
+- Casos de uso con lógica desacoplada y testable.
+
+Para ejecutar los tests:
+
+```bash
+npm run test
+```
+
+Para generar un informe de cobertura:
+
+```bash
+npm run test:coverage
+```
+
 ___
 
 ## Licencia
